@@ -51,3 +51,30 @@ exports.get_from_radius = function(req, res, next){
     })
 
 }
+
+exports.get_from_distance = function(req, res, next){
+
+    Planet.find(function(err, planets){
+        if (err){
+            res.send(err)
+        }else{
+            
+            // GET PLANET NAME
+            let title = req.query.object
+            let distance = req.query.distance
+
+            let obj = {
+                p_title: title.toUpperCase(),
+                p_distance: Number(distance)
+            }
+            let newplanets = system_calculator.getFromDistance(obj, planets)
+
+            let responsedata = {
+                unit: 'CM',
+                bodies: newplanets
+            }
+            res.json(responsedata);
+        }
+    })
+
+}

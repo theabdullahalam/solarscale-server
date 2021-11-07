@@ -62,7 +62,10 @@ function calculateDistances(distance_obj, planets){
 
     })
 
-    return newplanets
+    return {
+        planets: newplanets,
+        ratio: ratio
+    }
 
 }
 
@@ -106,15 +109,26 @@ function getFromSize(size_obj, planets){
 
     let distanced_planets = calculateDistances(distance_obj, sized_planets.planets)
 
-    return distanced_planets
+    return distanced_planets.planets
 
 
 }
 
 function getFromDistance(distance_obj, planets){
+
     let distanced_planets = calculateDistances(distance_obj, planets)
+
+    let size_obj = {
+        p_title: 'MERCURY',
+        p_radius: distanced_planets.planets[1].p_radius * distanced_planets.ratio
+    }
+
+    let sized_planets = calculateSizes(size_obj, distanced_planets.planets)
+
+    return sized_planets.planets
 }
 
 exports.calculateSizes = calculateSizes
 exports.calculateDistances = calculateDistances
 exports.getFromSize = getFromSize
+exports.getFromDistance = getFromDistance
