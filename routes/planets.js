@@ -14,4 +14,7 @@ router.get('/getfromsize', cors(), planets_controller.get_from_radius);
 /* GET PLANETS BASED ON DISTANCE */
 router.get('/getfromdistance', cors(), planets_controller.get_from_distance);
 
+/* GET PLANETS BASED ON DISTANCE */
+router.get('/getfromgap', cors(), planets_controller.get_from_gap);
+
 module.exports = router;

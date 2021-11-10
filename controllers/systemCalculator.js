@@ -37,6 +37,27 @@ function getActualGap(title, planets){
     return d;
 }
 
+function calculateEverything(ratio, planets){
+    
+    let newplanets = planets
+
+    // console.log(newplanets);
+
+    // POPULATE VALUE
+    newplanets.forEach(planet => {
+        
+        planet.p_radius = planet.p_radius * ratio
+        planet.p_distance = planet.p_distance * ratio
+        planet.p_gap = planet.p_gap * ratio        
+
+    })
+
+    return {
+        planets: newplanets,
+        ratio: ratio
+    }
+}
+
 function calculateDistances(distance_obj, planets){
 
     let title = distance_obj.p_title
@@ -100,35 +121,45 @@ function calculateSizes(size_obj, planets){
 
 function getFromSize(size_obj, planets){
 
-    let sized_planets = calculateSizes(size_obj, planets)
+    let title = size_obj.p_title
+    let actual_radius = getActualSize(title, planets)
+    let newradius = size_obj.p_radius
 
-    let distance_obj = {
-        p_title: 'MERCURY',
-        p_distance: sized_planets.planets[1].p_distance * sized_planets.ratio
-    }
+    let ratio = newradius/actual_radius
+    let new_planets = calculateEverything(ratio, planets)
 
-    let distanced_planets = calculateDistances(distance_obj, sized_planets.planets)
-
-    return distanced_planets.planets
+    return new_planets.planets
 
 
 }
 
 function getFromDistance(distance_obj, planets){
 
-    let distanced_planets = calculateDistances(distance_obj, planets)
+    let title = distance_obj.p_title
+    let newdistance = distance_obj.p_distance
+    let actual_distance = getActualDistance(title, planets)
 
-    let size_obj = {
-        p_title: 'MERCURY',
-        p_radius: distanced_planets.planets[1].p_radius * distanced_planets.ratio
-    }
+    let ratio = newdistance/actual_distance.p_distance
+    let new_planets = calculateEverything(ratio, planets)
 
-    let sized_planets = calculateSizes(size_obj, distanced_planets.planets)
+    return new_planets.planets
+}
 
-    return sized_planets.planets
+function getFromGap(gap_obj, planets){
+
+    let title = gap_obj.p_title
+    let newgap = gap_obj.p_gap
+    let actual_gap = getActualGap(title, planets)
+
+    let ratio = newgap/actual_gap.p_gap
+    let new_planets = calculateEverything(ratio, planets)
+
+    return new_planets.planets
+    
 }
 
 exports.calculateSizes = calculateSizes
 exports.calculateDistances = calculateDistances
 exports.getFromSize = getFromSize
 exports.getFromDistance = getFromDistance
+exports.getFromGap = getFromGap
