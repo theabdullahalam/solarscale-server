@@ -62,9 +62,9 @@ var planets = [
         p_position: 3,
         p_title: 'EARTH',
         p_color: '#4e95ff',
-        p_radius: 605200000,
-        p_distance: 10820000000000.0,
-        p_gap: 5030000000000.0
+        p_radius: 637800000,
+        p_distance: 14960000000000.0,
+        p_gap: 4140000000000.0
     },
     {
         p_position: 4,
