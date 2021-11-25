@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const async = require('async')
+var config = require('./config')
 
 // CONNECTION STUFF
-let mongourl = 'mongodb://solarscaleuser:abdullah1998@localhost:27017/solarscale'
+let mongourl = config.credentials.url
 mongoose.connect(mongourl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -115,25 +116,6 @@ var planets = [
     }   
 
 ]
-
-function updateToCm(){
-    planets.forEach(planetobj => {
-        PlanetModel.find(planetobj)
-        .then(d => {
-            
-            let r = d[0].p_radius
-            let cmr = r * 100000
-
-            PlanetModel.findOneAndUpdate(planetobj, {$set: {p_radius: cmr}})
-            .then(p => {
-                console.log(p);
-                console.log('Done I gues...');
-            })
-            
-        })
-
-    })
-}
 
 function createPlanets(){
     planets.forEach(planetobj => {

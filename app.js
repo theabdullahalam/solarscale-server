@@ -4,9 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
+var config = require('./config')
 
 // MONGODB
-let mongourl = 'mongodb://solarscaleuser:abdullah1998@localhost:27017/solarscale'
+let mongourl = config.credentials.url
 mongoose.connect(mongourl, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
