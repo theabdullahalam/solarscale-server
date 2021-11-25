@@ -30,7 +30,7 @@ var planet_schema = new mongoose.Schema(
     }
 );
 
-// CREATE A MODEL I GUESS
+// CREATE A MODEL
 var PlanetModel = mongoose.model('planets', planet_schema)
 
 var planets = [
